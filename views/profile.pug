@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+    div#profileInfo(class="container-fluid mt-3")
+        div(class="row justify-content-start")
+            div#yes(class="col-6")
+                h1 Profile
+        div(class="row justify-content-md-center")
+            div(class="col") 
+                p Email
+                h3 #{user.username}
+            div(class="col") 
+                p Password
+                h3 lol no
+            div(class="col") 
+                p Money
+                h3 #{"$" + user.money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+            div(class="col") 
+                p Number of homes
+                h3 #{user.homes.length}
+            div(class="col")
+                p Current Job
+                if (user.job)
+                    h3 #{user.job.name}
+                else
+                    h3 None
+    div#ownedHomes(class="container-fluid")
+        h1 Your Owned Homes
+        include homeCards.pug

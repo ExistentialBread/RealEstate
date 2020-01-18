@@ -1,0 +1,28 @@
+extends layout.pug
+
+block content
+    div(class="container")
+        div(class="row")
+            form#loginSignup.col-6(action="" method="POST")
+                p#errMsg(class="d-none text-danger") There were errors in the form
+                div(class="form-group")
+                    label(for="email") Email Address
+                    input(type="email" class="form-control " + userValid name="username" aria-describedby="emailHelp" required)
+                    div(class="invalid-feedback") Email is Invalid
+                div(class="form-group")
+                    label(for="password") Password
+                    input(type="password" class="form-control " + passwordValid name="password" required)
+                    div(class="invalid-feedback") Password is Invalid
+                div#confirmPassword(class=(signup === "true") ? "form-group" : "form-group d-none")
+                    label(for="passwordConfirm") Confirm Password
+                    input(type="password" class="form-control " + passwordConfirmValid name="passwordConfirm")
+                    div(class="invalid-feedback") Second Password does not match
+                div(class="form-group form-check")
+                    input(type="checkbox" class="form-check-input" id="stayLoggedIn")
+                    label(class="form-check-label" for="stayLoggedIn") Stay Logged In
+                if (signup)
+                    button#loginSignUpButton(type="submit" class="btn btn-primary" name="loginSignUpButton" value="Sign Up") Sign Up
+                    p#toggler Login Instead
+                else
+                    button#loginSignUpButton(type="submit" class="btn btn-primary" name="loginSignUpButton" value="Login") Login
+                    p#toggler Sign Up Instead

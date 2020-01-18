@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+    h1(class="centered heading") Browse all available homes
+    hr
+    div(class="container")
+        if inventory.length
+            include homeCards.pug
+        else 
+            div(class="row justify-content-md-center")
+                div(class="col-4 centered text-danger" )
+                    h3 Sorry, there are currently no houses available

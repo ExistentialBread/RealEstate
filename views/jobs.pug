@@ -1,0 +1,19 @@
+extends layout.pug
+
+block content
+    h1 Short on cash? Apply for a job!
+    if (employed)
+        div(class="container")
+            div(class="centered")
+                h3 You are already on a job! You can wait for it to finish or quit without getting paid.
+                h3 Time Remaining:
+                h2#timeLeft(class="text-success") #{timeLeft}
+            div(class="progress")
+                div#progressBar(class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar")
+            form#claim(action="/jobs/cashIn" class="d-none" method="POST")
+                button(type="submit" class="btn btn-primary") Claim Pay
+            form#quit(action="/jobs/quit" method="POST")
+                button(type="submit" class="btn btn-danger") Quit
+        div#totalTime(class="d-none") #{totalTime}
+
+    include jobCards.pug

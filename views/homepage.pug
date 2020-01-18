@@ -1,0 +1,22 @@
+extends layout.pug
+
+block content
+    if (errMsg)
+        div#homeAlert(class="alert alert-danger ml-3" role="alert") #{errMsg}
+    
+    if (home)
+        div#homeImg
+            img(src="/images/" + home.name + ".jpg" alt="A Beaut")
+
+        ul
+            li #[strong Name: ] #{home.name}
+            li #[strong Price: ] #{home.price}
+            li #[strong Size: ] #{home.size}
+            li #[strong Address: ] #{home.address}
+            li #[strong Name: ] #{home.name}
+
+            form(action="/inventory/" + home._id method="POST")
+                button(type="submit" class="btn btn-primary" name="buySell" value=owned ? "Sell" : "Buy") #{owned ? "Sell" : "Buy"}
+    else 
+        h1(class="text-danger") Sorry, home could not be displayed
+        

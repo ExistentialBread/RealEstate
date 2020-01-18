@@ -1,0 +1,56 @@
+#nav {
+    background-color: #e3f2fd;
+    height:7vh;
+}
+
+#claim {
+    margin:10px;
+    text-align: right;
+}
+
+#quit {
+    margin:10px;
+    text-align: right;
+}
+
+#ownedHomes {
+    background-color:gainsboro;
+}
+
+#homeAlert {
+    width:30%;
+    margin:30px;
+}
+
+#profileInfo {
+    background-color:#fc4364;
+    color:white;
+}
+
+#toggler {
+    color: blueviolet;
+}
+
+#toggler:hover {
+    text-decoration: underline;
+}
+
+.carousel-caption {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.carousel-img  {
+    height: 93vh;
+}
+
+.centered {
+    text-align:center;
+}
+
+.heading {
+    margin-top:50px;
+}
+
+a {
+    text-shadow:none;
+}
