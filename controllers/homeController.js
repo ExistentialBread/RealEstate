@@ -2,7 +2,7 @@ const Home = require("../models/homeModel");
 const User = require("../models/userModel");
 const ObjectId = require("mongodb").ObjectID;
 
-buyHome = function(req, res, next) {
+buyHome = function(req, res) {
     return new Promise(async function(resolve, reject) {
         let homeId = req.params.id;
         let home = await Home.findById(homeId).exec();
@@ -25,7 +25,7 @@ buyHome = function(req, res, next) {
     });
 }; 
 
-sellHome = function(req, res, next) {
+sellHome = function(req, res) {
     return new Promise(async function(resolve, reject) {
         let homeId = req.params.id;
         let user = await User.findById(req.session.userId).populate("homes");
@@ -45,13 +45,13 @@ sellHome = function(req, res, next) {
     });
 }; 
 
-exports.buyOrSellHome = async function(req, res, next) {
+exports.buyOrSellHome = async function(req, res) {
     try {
         if (req.body.buySell === "Buy") {
-            await buyHome(req, res, next);
+            await buyHome(req, res);
         }
         else {
-            await sellHome(req, res, next);
+            await sellHome(req, res);
         }
         res.redirect("/profile/" + req.session.userId);
     }
@@ -74,7 +74,9 @@ async function displayPageOfHome(req, res) {
         let id = req.params.id;
         homeInfo = await Home.findOne({"_id": ObjectId(id)}).exec();
         if (!homeInfo) {
-            throw "Home not found";
+            let err = "Home not found";
+            err.status = 404;
+            return next(err);
         }
 
         if (req.session.userId) {

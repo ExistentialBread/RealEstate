@@ -17,9 +17,6 @@ block content
                     label(for="passwordConfirm") Confirm Password
                     input(type="password" class="form-control " + passwordConfirmValid name="passwordConfirm")
                     div(class="invalid-feedback") Second Password does not match
-                div(class="form-group form-check")
-                    input(type="checkbox" class="form-check-input" id="stayLoggedIn")
-                    label(class="form-check-label" for="stayLoggedIn") Stay Logged In
                 if (signup)
                     button#loginSignUpButton(type="submit" class="btn btn-primary" name="loginSignUpButton" value="Sign Up") Sign Up
                     p#toggler Login Instead

@@ -1,7 +1,3 @@
-var session = require("express-session");
-var User = require("../models/userModel");
-var ObjectId = require("mongoose").ObjectId;
-
 module.exports.checkSess = 
 function(req, res, next) {
     if (req.session && req.session.userId) {
@@ -11,7 +7,6 @@ function(req, res, next) {
         req.sess = false;
     }
     return next();
-
 }
 
 module.exports.requireLogin = 

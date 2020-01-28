@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let HomeSchema = new Schema({
+
     name: {
         type: String,
         trim: true,
@@ -34,6 +35,7 @@ let HomeSchema = new Schema({
         type: Boolean,
         default: false,
     }
+    
 });
 
 HomeSchema

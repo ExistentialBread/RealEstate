@@ -74,6 +74,12 @@ function createHomes(cb) {
         function(callback) {
             homeCreate("Yeet", "432 Park Ave", "New York, New York" , "10065", 3000000, 15000, callback);
         },
+        function(callback) {
+            homeCreate("One", "One Street Blvd", "Townsville, USA" , "13375", 100000, 10000, callback);
+        },
+        function(callback) {
+            homeCreate("Two", "Two Street Bldv", "Townsville, USA" , "13375", 200000, 20000, callback);
+        }
     ], cb);
 }
 

@@ -28,7 +28,6 @@ let userSchema = new Schema({
         type: Date,
     }
 
-
 });
 
 userSchema

@@ -17,7 +17,6 @@ exports.login = async function(req, res, next) {
         user = await User.findOne({username: username}).exec();
     }
     catch (err) {
-        console.err(err);
         next(err);
     }
     if (user) {
@@ -57,53 +56,50 @@ exports.signup = [
             if (value != req.body.password) {
                 throw new Error("passwordConfirm");
             }
-                return value;
+            return value;
         }),
-        async function(req, res, next) {
-            let username = req.body.username;
-            let password = req.body.password;
+    async function(req, res) {
+        let username = req.body.username;
+        let password = req.body.password;
 
-            let usernameValid = notInvalid;
-            let passwordValid = notInvalid;
-            let passwordConfirmValid = notInvalid;
+        let usernameValid = notInvalid;
+        let passwordValid = notInvalid;
+        let passwordConfirmValid = notInvalid;
 
-            
-            try {
-                let errs = validator.validationResult(req).array();
-            
-                let passwordHashed = await hash.hash(password, 10);
+        
+        try {
+            let errs = validator.validationResult(req).array();      
+            let passwordHashed = await hash.hash(password, 10);
+            let user = new User({
+                username: username,
+                password: passwordHashed
+            });
 
-                let user = new User({
-                    username: username,
-                    password: passwordHashed
-                });
-
-
-                if (errs.length != 0) {
-                    if (errs.some(obj => obj.msg === "passwordConfirm")) {
-                        passwordConfirmValid = invalid;
-                    }
-                    if (errs.some(obj => obj.msg === "password")) {
-                        passwordValid = invalid;
-                    }
-                    if (errs.some(obj => obj.msg === "username")) {
-                        usernameValid = invalid;
-                    }
-                    return res.render("login", {title: title, sess: req.sess, 
-                        userValid: usernameValid, 
-                        passwordValid: passwordValid,
-                        passwordConfirmValid: passwordConfirmValid,
-                        signup: "true"});
+            if (errs.length != 0) {
+                if (errs.some(obj => obj.msg === "passwordConfirm")) {
+                    passwordConfirmValid = invalid;
                 }
-                await user.save();
-                req.session.userId = user._id;
-                return res.redirect(user.url);
+                if (errs.some(obj => obj.msg === "password")) {
+                    passwordValid = invalid;
+                }
+                if (errs.some(obj => obj.msg === "username")) {
+                    usernameValid = invalid;
+                }
+                return res.render("login", {title: title, sess: req.sess, 
+                    userValid: usernameValid, 
+                    passwordValid: passwordValid,
+                    passwordConfirmValid: passwordConfirmValid,
+                    signup: "true"});
             }
-            catch (err) {
-                throw err;
-            }
+            await user.save();
+            req.session.userId = user._id;
+            return res.redirect(user.url);
         }
-    ];
+        catch (err) {
+            throw err;
+        }
+    }
+];
 
 exports.display = function(req, res, next) {
     User.findOne({_id: req.session.userId})

@@ -15,8 +15,8 @@ exports.joinJob = async function(req, res, next) {
 
 exports.finishJob = async function(req, res) {
     let user = await User.findById(req.session.userId)
-    .populate("job")
-    .exec();
+        .populate("job")
+        .exec();
     if (user.timeRemaining <= 0) {
         user.money += user.job.pay;
         user.job = undefined; 

@@ -1,10 +1,8 @@
 const express = require("express");
 const homeController = require("../controllers/homeController");
-const router = express.Router();
 const funcs = require("../controllers/sessionController");
 
-
-const siteName = "Real Estate";
+const router = express.Router();
 
 router.get("/", homeController.displayHomes);
 
